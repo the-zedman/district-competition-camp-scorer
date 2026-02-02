@@ -483,10 +483,46 @@ h2 {
   font-size: 0.85rem;
   font-weight: 700; /* Nunito Sans Bold */
   margin-right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .btn-edit:hover {
   background: rgba(61, 92, 146, 0.1); /* Scouts Medium Blue with opacity */
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-icon {
+  display: none;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-text {
+  display: inline;
+}
+
+@media (max-width: 767px) {
+  .btn-icon {
+    display: inline-block;
+  }
+  
+  .btn-text {
+    display: none;
+  }
+  
+  .btn-edit,
+  .btn-danger {
+    padding: 0.4rem 0.5rem;
+    min-width: 2.5rem;
+    justify-content: center;
+  }
 }
 
 .admins-form-block {

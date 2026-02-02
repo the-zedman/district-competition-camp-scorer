@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
         `<td>${escapeHtml(admin.realName)}</td>` +
         `<td>${escapeHtml(admin.scoutGroup)}</td>` +
         '<td class="th-actions">' +
-        `<button type="button" class="btn btn-edit" data-id="${admin.id}" data-action="edit">Edit</button>` +
-        `<button type="button" class="btn btn-danger" data-id="${admin.id}" data-action="delete">Remove</button>` +
+        `<button type="button" class="btn btn-edit" data-id="${admin.id}" data-action="edit"><span class="btn-icon">✏️</span><span class="btn-text">Edit</span></button>` +
+        `<button type="button" class="btn btn-danger" data-id="${admin.id}" data-action="delete"><span class="btn-icon">🗑️</span><span class="btn-text">Remove</span></button>` +
         '</td>';
       adminsTableBody.appendChild(tr);
     });

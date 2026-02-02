@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
         `<td>${escapeHtml(scorer.realName)}</td>` +
         `<td>${escapeHtml(scorer.scoutGroup)}</td>` +
         '<td class="th-actions">' +
-        `<button type="button" class="btn btn-edit" data-id="${scorer.id}" data-action="edit">Edit</button>` +
-        `<button type="button" class="btn btn-danger" data-id="${scorer.id}" data-action="delete">Remove</button>` +
+        `<button type="button" class="btn btn-edit" data-id="${scorer.id}" data-action="edit"><span class="btn-icon">✏️</span><span class="btn-text">Edit</span></button>` +
+        `<button type="button" class="btn btn-danger" data-id="${scorer.id}" data-action="delete"><span class="btn-icon">🗑️</span><span class="btn-text">Remove</span></button>` +
         '</td>';
       scorersTableBody.appendChild(tr);
     });
