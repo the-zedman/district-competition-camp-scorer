@@ -28,6 +28,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
@@ -39,6 +40,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Ensure all text elements use Nunito Sans */
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, li, td, th,
+label, input, textarea, select, button {
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .header {
@@ -103,6 +111,7 @@ body {
 .tagline {
   margin: 0.25rem 0 0;
   font-size: 0.9rem;
+  font-weight: 400; /* Nunito Sans Regular */
   opacity: 0.9;
 }
 
@@ -127,6 +136,7 @@ body {
   color: white;
   text-decoration: none;
   padding: 1rem 1.5rem;
+  font-weight: 400; /* Nunito Sans Regular */
   transition: background-color 0.2s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -193,6 +203,7 @@ h2 {
 
 .award-list li {
   margin-bottom: 0.5rem;
+  font-weight: 400; /* Nunito Sans Regular */
 }
 
 .scoring,
@@ -282,11 +293,13 @@ h2 {
 .admins-loading,
 .admins-error {
   margin-bottom: 1rem;
+  font-weight: 400; /* Nunito Sans Regular */
 }
 
 .admins-error {
   color: #c00;
   font-size: 0.9rem;
+  font-weight: 400; /* Nunito Sans Regular */
 }
 
 .admins-list-wrap {
@@ -298,6 +311,7 @@ h2 {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  font-weight: 400; /* Nunito Sans Regular */
 }
 
 .admins-table th,
@@ -305,6 +319,7 @@ h2 {
   padding: 0.6rem 0.75rem;
   text-align: left;
   border-bottom: 1px solid var(--border);
+  font-weight: 400; /* Nunito Sans Regular - will be overridden for th */
 }
 
 .admins-table th {
@@ -325,11 +340,12 @@ h2 {
   display: inline-block;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400; /* Nunito Sans Regular - will be overridden by specific button classes */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .btn-primary {
