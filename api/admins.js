@@ -1,8 +1,9 @@
 import { put, list } from '@vercel/blob';
+import bcrypt from 'bcryptjs';
 
 const BLOB_PATH = 'admins.csv';
-const CSV_HEADER = 'scout_name,real_name,scout_group';
-const INITIAL_ROW = '"Chip","James Robinson","1st Blackheath"';
+const CSV_HEADER = 'scout_name,real_name,scout_group,password_hash';
+const INITIAL_ROW = '"Chip","James Robinson","1st Blackheath",""'; // Empty password - must be set via edit
 
 function csvEscape(value) {
   if (value == null) return '""';
@@ -40,19 +41,27 @@ function parseCSV(text) {
     parsed.push(field.trim());
     rows.push(parsed);
   }
-  const dataRows = rows[0] && rows[0].map(h => h.toLowerCase()).includes('scout_name') ? rows.slice(1) : rows;
+  const headerRow = rows[0] || [];
+  const headerIndex = headerRow.map(h => h.toLowerCase().replace(/^"|"$/g, ''));
+  const scoutNameIdx = headerIndex.indexOf('scout_name');
+  const realNameIdx = headerIndex.indexOf('real_name');
+  const scoutGroupIdx = headerIndex.indexOf('scout_group');
+  const passwordHashIdx = headerIndex.indexOf('password_hash');
+  
+  const dataRows = scoutNameIdx >= 0 ? rows.slice(1) : rows;
   return dataRows.map((row, index) => ({
     id: index,
-    scoutName: (row[0] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
-    realName: (row[1] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
-    scoutGroup: (row[2] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+    scoutName: (row[scoutNameIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+    realName: (row[realNameIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+    scoutGroup: (row[scoutGroupIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+    passwordHash: (row[passwordHashIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
   }));
 }
 
 function toCSV(admins) {
   const header = CSV_HEADER;
   const rows = admins.map(a =>
-    [csvEscape(a.scoutName), csvEscape(a.realName), csvEscape(a.scoutGroup)].join(',')
+    [csvEscape(a.scoutName), csvEscape(a.realName), csvEscape(a.scoutGroup), csvEscape(a.passwordHash || '')].join(',')
   );
   return [header, ...rows].join('\n');
 }
@@ -102,32 +111,40 @@ export default async function handler(req, res) {
         await writeBlobContent(csv);
       }
       const admins = parseCSV(csv);
-      return res.status(200).json(admins);
+      // Don't return password hashes to frontend
+      const adminsWithoutPasswords = admins.map(({ passwordHash, ...rest }) => rest);
+      return res.status(200).json(adminsWithoutPasswords);
     }
 
     if (req.method === 'POST') {
-      const { scoutName, realName, scoutGroup } = req.body || {};
+      const { scoutName, realName, scoutGroup, password } = req.body || {};
       if (!scoutName?.trim() || !realName?.trim() || !scoutGroup?.trim()) {
         return res.status(400).json({ error: 'scoutName, realName, and scoutGroup are required' });
       }
+      if (!password?.trim()) {
+        return res.status(400).json({ error: 'password is required' });
+      }
       let csv = await readBlobContent();
       if (csv == null || csv.trim() === '') {
-        csv = [CSV_HEADER, INITIAL_ROW].join('\n');
+        csv = CSV_HEADER + '\n';
       }
       const admins = parseCSV(csv);
+      const passwordHash = await bcrypt.hash(String(password).trim(), 10);
       admins.push({
         id: admins.length,
         scoutName: String(scoutName).trim(),
         realName: String(realName).trim(),
         scoutGroup: String(scoutGroup).trim(),
+        passwordHash,
       });
       const newCsv = toCSV(admins);
       await writeBlobContent(newCsv);
-      return res.status(200).json(admins);
+      const adminsWithoutPasswords = admins.map(({ passwordHash, ...rest }) => rest);
+      return res.status(200).json(adminsWithoutPasswords);
     }
 
     if (req.method === 'PUT') {
-      const { id, scoutName, realName, scoutGroup } = req.body || {};
+      const { id, scoutName, realName, scoutGroup, password } = req.body || {};
       const index = typeof id === 'number' ? id : parseInt(id, 10);
       if (Number.isNaN(index) || index < 0) {
         return res.status(400).json({ error: 'Valid id is required' });
@@ -139,14 +156,23 @@ export default async function handler(req, res) {
       if (!csv) return res.status(404).json({ error: 'No admins file found' });
       const admins = parseCSV(csv);
       if (index >= admins.length) return res.status(404).json({ error: 'Admin not found' });
+      
+      // If password provided, hash it; otherwise keep existing hash
+      let passwordHash = admins[index].passwordHash;
+      if (password?.trim()) {
+        passwordHash = await bcrypt.hash(String(password).trim(), 10);
+      }
+      
       admins[index] = {
         id: index,
         scoutName: String(scoutName).trim(),
         realName: String(realName).trim(),
         scoutGroup: String(scoutGroup).trim(),
+        passwordHash,
       };
       await writeBlobContent(toCSV(admins));
-      return res.status(200).json(admins);
+      const adminsWithoutPasswords = admins.map(({ passwordHash, ...rest }) => rest);
+      return res.status(200).json(adminsWithoutPasswords);
     }
 
     if (req.method === 'DELETE') {
@@ -162,7 +188,8 @@ export default async function handler(req, res) {
       admins.splice(index, 1);
       const reindexed = admins.map((a, i) => ({ ...a, id: i }));
       await writeBlobContent(toCSV(reindexed));
-      return res.status(200).json(reindexed);
+      const reindexedWithoutPasswords = reindexed.map(({ passwordHash, ...rest }) => rest);
+      return res.status(200).json(reindexedWithoutPasswords);
     }
 
     return res.status(405).json({ error: 'Method not allowed' });

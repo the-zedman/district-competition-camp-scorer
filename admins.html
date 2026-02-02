@@ -21,6 +21,7 @@
         <h1>Blue Mountains District Competition Camp</h1>
         <p class="tagline">Scoring tool · ~100 years of tradition</p>
       </div>
+      <button class="btn-logout" id="logoutBtn" title="Logout">Logout</button>
     </div>
     <nav class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-link">Home</a>
@@ -73,6 +74,11 @@
               Scout Group
               <input type="text" id="adminScoutGroup" name="scoutGroup" required placeholder="e.g. 1st Blackheath" />
             </label>
+            <label class="form-label">
+              Password
+              <input type="password" id="adminPassword" name="password" placeholder="Leave blank to keep existing" />
+              <small style="color: var(--text-muted); font-size: 0.85rem; font-weight: 400;">Required when adding new admin. Leave blank when editing to keep existing password.</small>
+            </label>
             <div class="form-actions">
               <button type="submit" class="btn btn-primary" id="adminSubmitBtn">Add admin</button>
               <button type="button" class="btn btn-secondary" id="adminCancelBtn" hidden>Cancel</button>
@@ -86,6 +92,7 @@
   <footer class="footer">
     <p>&copy; 2026 Chip - James Robinson - Scout Leader, 1st Blackheath</p>
   </footer>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
   <script src="admins.js"></script>
 </body>

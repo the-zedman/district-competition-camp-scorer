@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const adminScoutName = document.getElementById('adminScoutName');
   const adminRealName = document.getElementById('adminRealName');
   const adminScoutGroup = document.getElementById('adminScoutGroup');
+  const adminPassword = document.getElementById('adminPassword');
   const adminSubmitBtn = document.getElementById('adminSubmitBtn');
   const adminCancelBtn = document.getElementById('adminCancelBtn');
   const adminsFormTitle = document.getElementById('adminsFormTitle');
@@ -85,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
     adminScoutName.value = '';
     adminRealName.value = '';
     adminScoutGroup.value = '';
+    adminPassword.value = '';
+    adminPassword.required = true;
     adminSubmitBtn.textContent = 'Add admin';
     adminsFormTitle.textContent = 'Add admin';
     adminCancelBtn.hidden = true;
@@ -99,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
     adminScoutName.value = cells[0].textContent;
     adminRealName.value = cells[1].textContent;
     adminScoutGroup.value = cells[2].textContent;
+    adminPassword.value = '';
+    adminPassword.required = false; // Password optional when editing
     adminSubmitBtn.textContent = 'Save changes';
     adminsFormTitle.textContent = 'Edit admin';
     adminCancelBtn.hidden = false;
@@ -138,12 +143,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const scoutName = adminScoutName.value.trim();
     const realName = adminRealName.value.trim();
     const scoutGroup = adminScoutGroup.value.trim();
+    const password = adminPassword.value.trim();
     if (!scoutName || !realName || !scoutGroup) {
       showAdminsError('Please fill in Scout name, Real name, and Scout Group.');
       return;
     }
+    const isEdit = adminId.value !== '';
+    if (!isEdit && !password) {
+      showAdminsError('Password is required when adding a new admin.');
+      return;
+    }
     const payload = { scoutName, realName, scoutGroup };
-    if (adminId.value !== '') payload.id = adminId.value;
+    if (password) payload.password = password;
+    if (isEdit) payload.id = adminId.value;
     adminSubmitBtn.disabled = true;
     addOrUpdateAdmin(payload)
       .then((admins) => {

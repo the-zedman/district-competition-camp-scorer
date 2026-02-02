@@ -38,4 +38,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  // Logout button
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function () {
+      if (window.authUtils) {
+        window.authUtils.clearAuth();
+        window.location.href = 'login.html';
+      }
+    });
+  }
 });

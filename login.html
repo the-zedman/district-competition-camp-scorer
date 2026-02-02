@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – Blue Mountains District Competition Camp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Blue Mountains District Competition Camp</h1>
+      <p class="login-tagline">Scoring tool · ~100 years of tradition</p>
+      
+      <form class="login-form" id="loginForm">
+        <div class="login-error" id="loginError" role="alert" hidden></div>
+        
+        <label class="form-label">
+          Scout name
+          <input type="text" id="scoutName" name="scoutName" required autocomplete="username" />
+        </label>
+        
+        <label class="form-label">
+          Password
+          <input type="password" id="password" name="password" required autocomplete="current-password" />
+        </label>
+        
+        <label class="form-label">
+          User type
+          <select id="userType" name="userType" required>
+            <option value="">Select...</option>
+            <option value="admin">Admin</option>
+            <option value="scorer">Scorer</option>
+          </select>
+        </label>
+        
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Login</button>
+      </form>
+    </div>
+  </div>
+  <script src="auth.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const scorerScoutName = document.getElementById('scorerScoutName');
   const scorerRealName = document.getElementById('scorerRealName');
   const scorerScoutGroup = document.getElementById('scorerScoutGroup');
+  const scorerPassword = document.getElementById('scorerPassword');
   const scorerSubmitBtn = document.getElementById('scorerSubmitBtn');
   const scorerCancelBtn = document.getElementById('scorerCancelBtn');
   const scorersFormTitle = document.getElementById('scorersFormTitle');
@@ -85,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
     scorerScoutName.value = '';
     scorerRealName.value = '';
     scorerScoutGroup.value = '';
+    scorerPassword.value = '';
+    scorerPassword.required = true;
     scorerSubmitBtn.textContent = 'Add scorer';
     scorersFormTitle.textContent = 'Add scorer';
     scorerCancelBtn.hidden = true;
@@ -99,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
     scorerScoutName.value = cells[0].textContent;
     scorerRealName.value = cells[1].textContent;
     scorerScoutGroup.value = cells[2].textContent;
+    scorerPassword.value = '';
+    scorerPassword.required = false; // Password optional when editing
     scorerSubmitBtn.textContent = 'Save changes';
     scorersFormTitle.textContent = 'Edit scorer';
     scorerCancelBtn.hidden = false;
@@ -138,12 +143,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const scoutName = scorerScoutName.value.trim();
     const realName = scorerRealName.value.trim();
     const scoutGroup = scorerScoutGroup.value.trim();
+    const password = scorerPassword.value.trim();
     if (!scoutName || !realName || !scoutGroup) {
       showScorersError('Please fill in Scout name, Real name, and Scout Group.');
       return;
     }
+    const isEdit = scorerId.value !== '';
+    if (!isEdit && !password) {
+      showScorersError('Password is required when adding a new scorer.');
+      return;
+    }
     const payload = { scoutName, realName, scoutGroup };
-    if (scorerId.value !== '') payload.id = scorerId.value;
+    if (password) payload.password = password;
+    if (isEdit) payload.id = scorerId.value;
     scorerSubmitBtn.disabled = true;
     addOrUpdateScorer(payload)
       .then((scorers) => {
