@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scorers – Blue Mountains District Competition Camp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <button class="burger-menu" id="burgerMenu" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="header-text">
+        <h1>Blue Mountains District Competition Camp</h1>
+        <p class="tagline">Scoring tool · ~100 years of tradition</p>
+      </div>
+    </div>
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#results" class="nav-link">Results</a>
+      <a href="index.html#patrols" class="nav-link">Patrols</a>
+      <a href="index.html#scoring" class="nav-link">Scoring</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="content-section">
+      <div class="page-header">
+        <a href="settings.html" class="back-link">← Back to Settings</a>
+        <h2>Scorers</h2>
+        <p class="settings-desc">Manage competition scorers. Data is stored in a CSV (Scout name, real name, Scout Group).</p>
+      </div>
+
+      <div class="settings-block">
+        <div class="admins-loading" id="scorersLoading">Loading scorers…</div>
+        <div class="admins-error" id="scorersError" role="alert" hidden></div>
+
+        <div class="admins-list-wrap" id="scorersListWrap" hidden>
+          <table class="admins-table" id="scorersTable">
+            <thead>
+              <tr>
+                <th>Scout name</th>
+                <th>Real name</th>
+                <th>Scout Group</th>
+                <th class="th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="scorersTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="admins-form-block">
+          <h4 id="scorersFormTitle">Add scorer</h4>
+          <form class="admins-form" id="scorersForm">
+            <input type="hidden" id="scorerId" name="id" value="" />
+            <label class="form-label">
+              Scout name
+              <input type="text" id="scorerScoutName" name="scoutName" required placeholder="e.g. Chip" />
+            </label>
+            <label class="form-label">
+              Real name
+              <input type="text" id="scorerRealName" name="realName" required placeholder="e.g. James Robinson" />
+            </label>
+            <label class="form-label">
+              Scout Group
+              <input type="text" id="scorerScoutGroup" name="scoutGroup" required placeholder="e.g. 1st Blackheath" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="scorerSubmitBtn">Add scorer</button>
+              <button type="button" class="btn btn-secondary" id="scorerCancelBtn" hidden>Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Chip - James Robinson - Scout Leader, 1st Blackheath</p>
+  </footer>
+  <script src="app.js"></script>
+  <script src="scorers.js"></script>
+</body>
+</html>
