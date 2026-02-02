@@ -1,9 +1,29 @@
 :root {
-  --bm-blue: #1e3a5f;
-  --bm-gold: #c9a227;
-  --bg: #f8f6f0;
-  --text: #2c2c2c;
-  --muted: #666;
+  /* Scouts Australia Primary Colours */
+  --scouts-medium-blue: #3D5C92; /* R61 G92 B146 - Scouts Medium Blue */
+  --scouts-navy-blue: #262661; /* R38 G38 B97 - Australian Navy Blue */
+  --scouts-dark-green: #00664A; /* R0 G102 B74 - Scouts Dark Green */
+  --scouts-dark-blue: #1A416F; /* R26 G65 B111 - Scouts Dark Blue */
+  
+  /* Scouts Australia Secondary Colours */
+  --scouts-teal: #008F88; /* R0 G143 B136 - Scouts Teal */
+  --light-grey: #E8E8E8; /* K8 */
+  --light-mid-grey: #D6D6D6; /* K16 */
+  --medium-grey: #808080; /* K50 */
+  --dark-grey: #333333; /* K80 */
+  
+  /* Scouts Section Colour */
+  --scouts-green: #00AE42; /* R0 G174 B66 - Scouts Scouts section colour */
+  
+  /* Application colours */
+  --primary: var(--scouts-medium-blue);
+  --primary-dark: var(--scouts-dark-blue);
+  --secondary: var(--scouts-green);
+  --bg: #FFFFFF;
+  --bg-light: #F8F8F8;
+  --text: #262626;
+  --text-muted: var(--medium-grey);
+  --border: var(--light-mid-grey);
 }
 
 * {
@@ -11,8 +31,9 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: var(--bg);
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  background: var(--bg-light);
   color: var(--text);
   margin: 0;
   min-height: 100vh;
@@ -21,7 +42,7 @@ body {
 }
 
 .header {
-  background: var(--bm-blue);
+  background: var(--primary);
   color: white;
   padding: 0;
   position: relative;
@@ -76,7 +97,7 @@ body {
 .header h1 {
   margin: 0;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 900; /* Nunito Sans Black for headings */
 }
 
 .tagline {
@@ -88,7 +109,7 @@ body {
 .nav-menu {
   display: none;
   flex-direction: column;
-  background: var(--bm-blue);
+  background: var(--primary);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0;
   max-height: 0;
@@ -158,8 +179,9 @@ body {
 }
 
 h2 {
-  color: var(--bm-blue);
+  color: var(--primary);
   font-size: 1.15rem;
+  font-weight: 900; /* Nunito Sans Black for headings */
   margin: 0 0 0.75rem;
 }
 
@@ -180,7 +202,7 @@ h2 {
 
 .scoring p,
 .content-section p {
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -194,7 +216,7 @@ h2 {
 .settings-card {
   display: block;
   padding: 1.25rem;
-  border: 1px solid #e0ddd6;
+  border: 1px solid var(--border);
   border-radius: 6px;
   background: white;
   text-decoration: none;
@@ -203,21 +225,23 @@ h2 {
 }
 
 .settings-card:hover {
-  border-color: var(--bm-blue);
-  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(61, 92, 146, 0.1); /* Scouts Medium Blue with opacity */
   transform: translateY(-1px);
 }
 
 .settings-card h3 {
   margin: 0 0 0.5rem;
-  color: var(--bm-blue);
+  color: var(--primary);
   font-size: 1.1rem;
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .settings-card p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 0.9rem;
+  font-weight: 400; /* Nunito Sans Regular */
 }
 
 .page-header {
@@ -227,10 +251,10 @@ h2 {
 .back-link {
   display: inline-block;
   margin-bottom: 0.75rem;
-  color: var(--bm-blue);
+  color: var(--primary);
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .back-link:hover {
@@ -242,14 +266,16 @@ h2 {
 }
 
 .settings-block h3 {
-  color: var(--bm-blue);
+  color: var(--primary);
   font-size: 1.1rem;
+  font-weight: 700; /* Nunito Sans Bold */
   margin: 0 0 0.5rem;
 }
 
 .settings-desc {
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 0.9rem;
+  font-weight: 400; /* Nunito Sans Regular */
   margin: 0 0 1rem;
 }
 
@@ -278,12 +304,12 @@ h2 {
 .admins-table td {
   padding: 0.6rem 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #e0ddd6;
+  border-bottom: 1px solid var(--border);
 }
 
 .admins-table th {
-  color: var(--bm-blue);
-  font-weight: 600;
+  color: var(--primary);
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .th-actions {
@@ -292,7 +318,7 @@ h2 {
 }
 
 .admins-table tbody tr:hover {
-  background: rgba(30, 58, 95, 0.04);
+  background: rgba(61, 92, 146, 0.04); /* Scouts Medium Blue with opacity */
 }
 
 .btn {
@@ -307,21 +333,24 @@ h2 {
 }
 
 .btn-primary {
-  background: var(--bm-blue);
+  background: var(--primary);
   color: white;
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .btn-primary:hover {
-  background: #163352;
+  background: var(--primary-dark);
 }
 
 .btn-secondary {
-  background: #e0ddd6;
+  background: var(--light-mid-grey);
   color: var(--text);
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .btn-secondary:hover {
-  background: #d0cdc6;
+  background: var(--medium-grey);
+  color: white;
 }
 
 .btn-danger {
@@ -329,6 +358,7 @@ h2 {
   color: #c00;
   padding: 0.35rem 0.6rem;
   font-size: 0.85rem;
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .btn-danger:hover {
@@ -337,24 +367,26 @@ h2 {
 
 .btn-edit {
   background: transparent;
-  color: var(--bm-blue);
+  color: var(--primary);
   padding: 0.35rem 0.6rem;
   font-size: 0.85rem;
+  font-weight: 700; /* Nunito Sans Bold */
   margin-right: 0.25rem;
 }
 
 .btn-edit:hover {
-  background: rgba(30, 58, 95, 0.1);
+  background: rgba(61, 92, 146, 0.1); /* Scouts Medium Blue with opacity */
 }
 
 .admins-form-block {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e0ddd6;
+  border-top: 1px solid var(--border);
 }
 
 .admins-form-block h4 {
   font-size: 1rem;
+  font-weight: 700; /* Nunito Sans Bold */
   margin: 0 0 0.75rem;
   color: var(--text);
 }
@@ -371,20 +403,22 @@ h2 {
   flex-direction: column;
   gap: 0.25rem;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700; /* Nunito Sans Bold */
 }
 
 .form-label input {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-size: 1rem;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
 }
 
 .form-label input:focus {
   outline: none;
-  border-color: var(--bm-blue);
-  box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(61, 92, 146, 0.2); /* Scouts Medium Blue with opacity */
 }
 
 .form-actions {
@@ -397,6 +431,7 @@ h2 {
   text-align: center;
   padding: 1rem;
   font-size: 0.85rem;
-  color: var(--muted);
-  border-top: 1px solid #e0ddd6;
+  font-weight: 300; /* Nunito Sans Light for captions */
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
 }
