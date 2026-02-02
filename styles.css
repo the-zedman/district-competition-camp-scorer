@@ -60,7 +60,15 @@ label, input, textarea, select, button {
   display: flex;
   align-items: center;
   padding: 1rem;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .header-content {
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
 }
 
 .burger-menu {
@@ -74,6 +82,13 @@ label, input, textarea, select, button {
   height: 2rem;
   padding: 0;
   z-index: 20;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .burger-menu {
+    order: 0; /* First item */
+  }
 }
 
 .burger-menu span {
@@ -100,6 +115,15 @@ label, input, textarea, select, button {
 .header-text {
   flex: 1;
   text-align: center;
+  min-width: 0; /* Allow text to shrink */
+}
+
+@media (max-width: 767px) {
+  .header-text {
+    order: 2;
+    flex-basis: 100%;
+    margin-top: 0.25rem;
+  }
 }
 
 .btn-logout {
@@ -113,16 +137,35 @@ label, input, textarea, select, button {
   font-weight: 700;
   font-family: 'Nunito Sans', sans-serif;
   transition: background-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-logout:hover {
   background: rgba(255, 255, 255, 0.3);
 }
 
+@media (max-width: 767px) {
+  .btn-logout {
+    order: 1;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    margin-left: auto; /* Push to right */
+  }
+}
+
 .header h1 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 900; /* Nunito Sans Black for headings */
+  line-height: 1.2;
+}
+
+@media (max-width: 767px) {
+  .header h1 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
 }
 
 .tagline {
@@ -130,6 +173,13 @@ label, input, textarea, select, button {
   font-size: 0.9rem;
   font-weight: 400; /* Nunito Sans Regular */
   opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .tagline {
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
 }
 
 .nav-menu {
