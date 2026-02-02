@@ -120,24 +120,20 @@ label, input, textarea, select, button {
 }
 
 @media (max-width: 767px) {
-  .header-content {
+  .header-text {
+    order: 1;
+    flex: 1;
+    text-align: center;
+    margin-top: 0;
     position: relative;
   }
   
-  .header-text {
-    order: 1;
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin-top: 0;
-    z-index: 1;
-    pointer-events: none; /* Allow clicks to pass through to burger menu */
-  }
-  
-  .header-text h1,
-  .header-text .tagline {
-    pointer-events: auto; /* Re-enable pointer events for text */
+  /* Center the text accounting for burger menu width */
+  .header-text::before {
+    content: '';
+    display: block;
+    width: 2rem; /* Same width as burger menu */
+    height: 0;
   }
 }
 
