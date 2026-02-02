@@ -123,8 +123,17 @@ label, input, textarea, select, button {
   .header-text {
     order: 1;
     flex: 1;
-    text-align: left;
+    text-align: center;
     margin-top: 0;
+    position: relative;
+  }
+  
+  /* Center the text accounting for burger menu width */
+  .header-text::before {
+    content: '';
+    display: block;
+    width: 2rem; /* Same width as burger menu */
+    height: 0;
   }
 }
 
