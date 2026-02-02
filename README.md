@@ -18,9 +18,16 @@ The competition has been running for nearly 100 years.
 ## Repo & deployment
 
 - **GitHub:** [github.com/the-zedman/district-competition-camp-scorer](https://github.com/the-zedman/district-competition-camp-scorer)
-- **Production:** Every push to `main` is built and deployed automatically via GitHub Actions (see `.github/workflows/deploy.yml`).
+- **Production:** Hosted on **Vercel** - every push to `main` automatically deploys to production.
 
-**One-time setup:** In the repo on GitHub go to **Settings → Pages** and set **Source** to **GitHub Actions**. Then each push to `main` will deploy to `https://<your-username>.github.io/district-competition-camp-scorer/`.
+**One-time setup:** Connect your GitHub repo to Vercel:
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click "Add New Project"
+3. Import `the-zedman/district-competition-camp-scorer`
+4. Vercel will auto-detect it as a static site (no build needed)
+5. Click "Deploy"
+
+After setup, every push to `main` will trigger an automatic deployment.
 
 ## Local development
 

@@ -1,0 +1,3 @@
+# API directory for serverless functions
+# If you need PHP backend functionality, add PHP files here as Vercel serverless functions
+# Example: api/score.php would be accessible at /api/score
