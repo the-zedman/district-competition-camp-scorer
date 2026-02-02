@@ -117,19 +117,42 @@ export default async function handler(req, res) {
       }
 
       const rows = parseCSV(csv);
-      const headerRow = rows[0] || [];
+      if (rows.length === 0) {
+        return res.status(404).json({ error: 'No users found in file' });
+      }
+      
+      let headerRow = rows[0] || [];
       const headerIndex = headerRow.map(h => h.toLowerCase().replace(/^"|"$/g, ''));
       
       const scoutNameIdx = headerIndex.indexOf('scout_name');
-      const passwordHashIdx = headerIndex.indexOf('password_hash');
+      if (scoutNameIdx === -1) {
+        return res.status(500).json({ error: 'Invalid CSV format: missing scout_name column' });
+      }
       
-      if (scoutNameIdx === -1 || passwordHashIdx === -1) {
-        return res.status(500).json({ error: 'Invalid CSV format' });
+      let passwordHashIdx = headerIndex.indexOf('password_hash');
+      
+      // If password_hash column doesn't exist, add it to header
+      if (passwordHashIdx === -1) {
+        headerRow.push('password_hash');
+        headerIndex.push('password_hash');
+        passwordHashIdx = headerIndex.length - 1;
+        
+        // Add empty password_hash to all existing rows
+        for (let i = 1; i < rows.length; i++) {
+          while (rows[i].length <= passwordHashIdx) {
+            rows[i].push('');
+          }
+        }
       }
 
       // Find the user and check if password is empty
       let found = false;
       for (let i = 1; i < rows.length; i++) {
+        // Ensure row has enough columns
+        while (rows[i].length <= passwordHashIdx) {
+          rows[i].push('');
+        }
+        
         const rowScoutName = (rows[i][scoutNameIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '');
         const rowPasswordHash = (rows[i][passwordHashIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '');
         
@@ -151,8 +174,11 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'User not found' });
       }
 
-      // Write back to blob
-      const header = headerRow.join(',');
+      // Write back to blob - ensure header includes password_hash
+      let header = headerRow.map(h => h.replace(/^"|"$/g, '')).join(',');
+      if (!header.toLowerCase().includes('password_hash')) {
+        header += ',password_hash';
+      }
       const newCsv = toCSV(rows.slice(1), header);
       
       await put(blobPath, newCsv, {
