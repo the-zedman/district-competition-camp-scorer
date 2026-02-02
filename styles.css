@@ -147,10 +147,13 @@ label, input, textarea, select, button {
 
 @media (max-width: 767px) {
   .btn-logout {
-    order: 1;
-    padding: 0.4rem 0.75rem;
-    font-size: 0.85rem;
-    margin-left: auto; /* Push to right */
+    display: none; /* Hide logout button on mobile - it's in the nav menu */
+  }
+  
+  .nav-link-logout {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.5rem;
+    padding-top: 1rem;
   }
 }
 
@@ -220,6 +223,10 @@ label, input, textarea, select, button {
 
 .nav-link:last-child {
   border-bottom: none;
+}
+
+.nav-link-logout {
+  font-weight: 700; /* Make logout stand out */
 }
 
 @media (min-width: 768px) {

@@ -39,10 +39,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Logout button
+  // Logout button (desktop)
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', function () {
+      if (window.authUtils) {
+        window.authUtils.clearAuth();
+        window.location.href = 'login.html';
+      }
+    });
+  }
+
+  // Logout link in nav menu (mobile)
+  const navLogout = document.getElementById('navLogout');
+  if (navLogout) {
+    navLogout.addEventListener('click', function (e) {
+      e.preventDefault();
       if (window.authUtils) {
         window.authUtils.clearAuth();
         window.location.href = 'login.html';
