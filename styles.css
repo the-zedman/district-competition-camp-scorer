@@ -273,6 +273,10 @@ label, input, textarea, select, button {
   .nav-link:last-child {
     border-right: none;
   }
+  
+  .nav-link-logout {
+    display: none; /* Hide logout link on desktop - button in header is used */
+  }
 }
 
 .main {
