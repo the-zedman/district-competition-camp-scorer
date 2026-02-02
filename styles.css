@@ -23,7 +23,53 @@ body {
 .header {
   background: var(--bm-blue);
   color: white;
-  padding: 1.5rem 1rem;
+  padding: 0;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.burger-menu {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  z-index: 20;
+}
+
+.burger-menu span {
+  width: 2rem;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.burger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.header-text {
+  flex: 1;
   text-align: center;
 }
 
@@ -37,6 +83,70 @@ body {
   margin: 0.25rem 0 0;
   font-size: 0.9rem;
   opacity: 0.9;
+}
+
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--bm-blue);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.nav-menu.active {
+  display: flex;
+  max-height: 400px;
+  padding: 0.5rem 0;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .header-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: none;
+    padding: 0;
+    border-top: none;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-link {
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-link:last-child {
+    border-right: none;
+  }
 }
 
 .main {
@@ -63,11 +173,13 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-.scoring {
+.scoring,
+.content-section {
   margin-top: 2rem;
 }
 
-.scoring p {
+.scoring p,
+.content-section p {
   color: var(--muted);
   margin: 0;
 }

@@ -8,12 +8,27 @@
 </head>
 <body>
   <header class="header">
-    <h1>Blue Mountains District Competition Camp</h1>
-    <p class="tagline">Scoring tool · ~100 years of tradition</p>
+    <div class="header-content">
+      <button class="burger-menu" id="burgerMenu" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="header-text">
+        <h1>Blue Mountains District Competition Camp</h1>
+        <p class="tagline">Scoring tool · ~100 years of tradition</p>
+      </div>
+    </div>
+    <nav class="nav-menu" id="navMenu">
+      <a href="#results" class="nav-link">Results</a>
+      <a href="#patrols" class="nav-link">Patrols</a>
+      <a href="#scoring" class="nav-link">Scoring</a>
+      <a href="#settings" class="nav-link">Settings</a>
+    </nav>
   </header>
 
   <main class="main">
-    <section class="awards">
+    <section class="awards" id="home">
       <h2>Awards</h2>
       <ul class="award-list">
         <li><strong>Camp Competition</strong> → Blue Mountains District Memorial Camping Shield</li>
@@ -22,14 +37,29 @@
       </ul>
     </section>
 
-    <section class="scoring">
+    <section class="content-section" id="results">
+      <h2>Results</h2>
+      <p>Competition results will be displayed here.</p>
+    </section>
+
+    <section class="content-section" id="patrols">
+      <h2>Patrols</h2>
+      <p>Patrol management and information will be displayed here.</p>
+    </section>
+
+    <section class="content-section" id="scoring">
       <h2>Scoring</h2>
       <p>Scoring modules and patrol entry will be added here.</p>
+    </section>
+
+    <section class="content-section" id="settings">
+      <h2>Settings</h2>
+      <p>Application settings and configuration will be displayed here.</p>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Blue Mountains District Scouts · Competition Camp Scorer</p>
+    <p>&copy; 2026 Chip - James Robinson - Scout Leader, 1st Blackheath</p>
   </footer>
   <script src="app.js"></script>
 </body>
