@@ -39,6 +39,15 @@ The **Settings → Admins** section reads and writes admins to a CSV stored in *
 
 The first admin is seeded as: **Chip**, **James Robinson**, **1st Blackheath**.
 
+### Authentication
+
+The app requires login for all users (admins and scorers). To enable authentication:
+
+1. **Set JWT_SECRET**: In Vercel project settings → Environment Variables, add `JWT_SECRET` with a strong random string (e.g., generate with `openssl rand -hex 32`).
+2. **Set passwords**: When adding admins or scorers, passwords are required. Passwords are hashed with bcrypt before storage.
+3. **Login**: Users visit the site and are redirected to `login.html` if not authenticated. They select their user type (Admin or Scorer) and enter their Scout name and password.
+4. **Session**: After login, users receive a JWT token stored in localStorage (valid for 7 days).
+
 ## Local development
 
 Open `index.html` in a browser, or use a local static server:

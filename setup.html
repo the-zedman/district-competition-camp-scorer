@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login – Blue Mountains District Competition Camp</title>
+  <title>Setup Password – Blue Mountains District Competition Camp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;900&display=swap" rel="stylesheet" />
@@ -13,10 +13,13 @@
   <div class="login-container">
     <div class="login-box">
       <h1>Blue Mountains District Competition Camp</h1>
-      <p class="login-tagline">Scoring tool · ~100 years of tradition</p>
+      <p class="login-tagline">Initial Password Setup</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center;">
+        Set your password to access the app. This page is only available for users without a password set.
+      </p>
       
-      <form class="login-form" id="loginForm">
-        <div class="login-error" id="loginError" role="alert" hidden></div>
+      <form class="login-form" id="setupForm">
+        <div class="login-error" id="setupError" role="alert" hidden></div>
         
         <label class="form-label">
           Scout name
@@ -25,7 +28,12 @@
         
         <label class="form-label">
           Password
-          <input type="password" id="password" name="password" required autocomplete="current-password" />
+          <input type="password" id="password" name="password" required autocomplete="new-password" />
+        </label>
+        
+        <label class="form-label">
+          Confirm Password
+          <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" />
         </label>
         
         <label class="form-label">
@@ -37,15 +45,14 @@
           </select>
         </label>
         
-        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Login</button>
+        <button type="submit" class="btn btn-primary btn-block" id="setupBtn">Set Password</button>
       </form>
       
       <p style="text-align: center; margin-top: 1rem;">
-        <a href="setup.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Need to set your password? Setup</a>
+        <a href="login.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Already have a password? Login</a>
       </p>
     </div>
   </div>
-  <script src="auth.js"></script>
-  <script src="login.js"></script>
+  <script src="setup.js"></script>
 </body>
 </html>

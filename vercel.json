@@ -7,7 +7,7 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/((?!api/|login\\.html).*)",
+      "source": "/((?!api/|login\\.html|setup\\.html).*)",
       "destination": "/index.html"
     }
   ],
