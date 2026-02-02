@@ -29,6 +29,16 @@ The competition has been running for nearly 100 years.
 
 After setup, every push to `main` will trigger an automatic deployment.
 
+### Settings > Admins (CSV storage)
+
+The **Settings → Admins** section reads and writes admins to a CSV stored in **Vercel Blob**. To enable it:
+
+1. In your Vercel project, go to **Storage** and create a **Blob** store.
+2. The project will get a `BLOB_READ_WRITE_TOKEN` environment variable automatically.
+3. Redeploy so the API can read/write the `admins.csv` file.
+
+The first admin is seeded as: **Chip**, **James Robinson**, **1st Blackheath**.
+
 ## Local development
 
 Open `index.html` in a browser, or use a local static server:

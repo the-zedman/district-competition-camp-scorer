@@ -1,0 +1,10 @@
+{
+  "name": "district-competition-camp-scorer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blue Mountains District Scouts Competition Camp Scorer",
+  "type": "module",
+  "dependencies": {
+    "@vercel/blob": "^0.26.0"
+  }
+}
