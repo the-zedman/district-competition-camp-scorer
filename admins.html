@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admins – Blue Mountains District Competition Camp</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <button class="burger-menu" id="burgerMenu" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="header-text">
+        <h1>Blue Mountains District Competition Camp</h1>
+        <p class="tagline">Scoring tool · ~100 years of tradition</p>
+      </div>
+    </div>
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#results" class="nav-link">Results</a>
+      <a href="index.html#patrols" class="nav-link">Patrols</a>
+      <a href="index.html#scoring" class="nav-link">Scoring</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="content-section">
+      <div class="page-header">
+        <a href="settings.html" class="back-link">← Back to Settings</a>
+        <h2>Admins</h2>
+        <p class="settings-desc">Manage site admins. Data is stored in a CSV (Scout name, real name, Scout Group).</p>
+      </div>
+
+      <div class="settings-block">
+        <div class="admins-loading" id="adminsLoading">Loading admins…</div>
+        <div class="admins-error" id="adminsError" role="alert" hidden></div>
+
+        <div class="admins-list-wrap" id="adminsListWrap" hidden>
+          <table class="admins-table" id="adminsTable">
+            <thead>
+              <tr>
+                <th>Scout name</th>
+                <th>Real name</th>
+                <th>Scout Group</th>
+                <th class="th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminsTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="admins-form-block">
+          <h4 id="adminsFormTitle">Add admin</h4>
+          <form class="admins-form" id="adminsForm">
+            <input type="hidden" id="adminId" name="id" value="" />
+            <label class="form-label">
+              Scout name
+              <input type="text" id="adminScoutName" name="scoutName" required placeholder="e.g. Chip" />
+            </label>
+            <label class="form-label">
+              Real name
+              <input type="text" id="adminRealName" name="realName" required placeholder="e.g. James Robinson" />
+            </label>
+            <label class="form-label">
+              Scout Group
+              <input type="text" id="adminScoutGroup" name="scoutGroup" required placeholder="e.g. 1st Blackheath" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="adminSubmitBtn">Add admin</button>
+              <button type="button" class="btn btn-secondary" id="adminCancelBtn" hidden>Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Chip - James Robinson - Scout Leader, 1st Blackheath</p>
+  </footer>
+  <script src="app.js"></script>
+  <script src="admins.js"></script>
+</body>
+</html>

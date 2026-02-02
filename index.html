@@ -23,7 +23,7 @@
       <a href="#results" class="nav-link">Results</a>
       <a href="#patrols" class="nav-link">Patrols</a>
       <a href="#scoring" class="nav-link">Scoring</a>
-      <a href="#settings" class="nav-link">Settings</a>
+      <a href="settings.html" class="nav-link">Settings</a>
     </nav>
   </header>
 
@@ -50,55 +50,6 @@
     <section class="content-section" id="scoring">
       <h2>Scoring</h2>
       <p>Scoring modules and patrol entry will be added here.</p>
-    </section>
-
-    <section class="content-section" id="settings">
-      <h2>Settings</h2>
-
-      <div class="settings-block">
-        <h3>Admins</h3>
-        <p class="settings-desc">Manage site admins. Data is stored in a CSV (Scout name, real name, Scout Group).</p>
-
-        <div class="admins-loading" id="adminsLoading">Loading admins…</div>
-        <div class="admins-error" id="adminsError" role="alert" hidden></div>
-
-        <div class="admins-list-wrap" id="adminsListWrap" hidden>
-          <table class="admins-table" id="adminsTable">
-            <thead>
-              <tr>
-                <th>Scout name</th>
-                <th>Real name</th>
-                <th>Scout Group</th>
-                <th class="th-actions">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminsTableBody"></tbody>
-          </table>
-        </div>
-
-        <div class="admins-form-block">
-          <h4 id="adminsFormTitle">Add admin</h4>
-          <form class="admins-form" id="adminsForm">
-            <input type="hidden" id="adminId" name="id" value="" />
-            <label class="form-label">
-              Scout name
-              <input type="text" id="adminScoutName" name="scoutName" required placeholder="e.g. Chip" />
-            </label>
-            <label class="form-label">
-              Real name
-              <input type="text" id="adminRealName" name="realName" required placeholder="e.g. James Robinson" />
-            </label>
-            <label class="form-label">
-              Scout Group
-              <input type="text" id="adminScoutGroup" name="scoutGroup" required placeholder="e.g. 1st Blackheath" />
-            </label>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary" id="adminSubmitBtn">Add admin</button>
-              <button type="button" class="btn btn-secondary" id="adminCancelBtn" hidden>Cancel</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </section>
   </main>
 

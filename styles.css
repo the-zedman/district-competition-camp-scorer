@@ -185,6 +185,58 @@ h2 {
 }
 
 /* Settings */
+.settings-menu {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.settings-card {
+  display: block;
+  padding: 1.25rem;
+  border: 1px solid #e0ddd6;
+  border-radius: 6px;
+  background: white;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.settings-card:hover {
+  border-color: var(--bm-blue);
+  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.1);
+  transform: translateY(-1px);
+}
+
+.settings-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--bm-blue);
+  font-size: 1.1rem;
+}
+
+.settings-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--bm-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
 .settings-block {
   margin-top: 1rem;
 }
