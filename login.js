@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginBtn = document.getElementById('loginBtn');
   const scoutNameInput = document.getElementById('scoutName');
   const passwordInput = document.getElementById('password');
-  const userTypeInput = document.getElementById('userType');
 
   function showError(msg) {
     loginError.textContent = msg;
@@ -28,10 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const scoutName = scoutNameInput.value.trim();
     const password = passwordInput.value;
-    const userType = userTypeInput.value;
 
-    if (!scoutName || !password || !userType) {
-      showError('Please fill in all fields.');
+    if (!scoutName || !password) {
+      showError('Please fill in Scout name and Password.');
       return;
     }
 
@@ -42,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const response = await fetch(`${window.location.origin}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ scoutName, password, userType }),
+        body: JSON.stringify({ scoutName, password }),
       });
 
       const data = await response.json();

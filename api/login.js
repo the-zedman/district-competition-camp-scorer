@@ -46,34 +46,42 @@ function parseCSV(text) {
   return rows;
 }
 
-async function findUser(scoutName, password, userType) {
-  const blobPath = userType === 'admin' ? 'admins.csv' : 'scorers.csv';
-  const csv = await readCSV(blobPath);
-  if (!csv) return null;
+async function findUser(scoutName, password) {
+  // Check admins.csv first, then scorers.csv
+  // If user exists in both, admin takes priority
+  const files = [
+    { path: 'admins.csv', type: 'admin' },
+    { path: 'scorers.csv', type: 'scorer' }
+  ];
 
-  const rows = parseCSV(csv);
-  const headerRow = rows[0] || [];
-  const headerIndex = headerRow.map(h => h.toLowerCase().replace(/^"|"$/g, ''));
-  
-  const scoutNameIdx = headerIndex.indexOf('scout_name');
-  const passwordHashIdx = headerIndex.indexOf('password_hash');
-  
-  if (scoutNameIdx === -1 || passwordHashIdx === -1) return null;
+  for (const file of files) {
+    const csv = await readCSV(file.path);
+    if (!csv) continue;
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
-    const rowScoutName = (row[scoutNameIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"');
-    const rowPasswordHash = (row[passwordHashIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"');
+    const rows = parseCSV(csv);
+    const headerRow = rows[0] || [];
+    const headerIndex = headerRow.map(h => h.toLowerCase().replace(/^"|"$/g, ''));
     
-    if (rowScoutName.toLowerCase() === scoutName.toLowerCase() && rowPasswordHash) {
-      const passwordMatch = await bcrypt.compare(password, rowPasswordHash);
-      if (passwordMatch) {
-        return {
-          scoutName: rowScoutName,
-          realName: (row[headerIndex.indexOf('real_name')] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
-          scoutGroup: (row[headerIndex.indexOf('scout_group')] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
-          userType,
-        };
+    const scoutNameIdx = headerIndex.indexOf('scout_name');
+    const passwordHashIdx = headerIndex.indexOf('password_hash');
+    
+    if (scoutNameIdx === -1 || passwordHashIdx === -1) continue;
+
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const rowScoutName = (row[scoutNameIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"');
+      const rowPasswordHash = (row[passwordHashIdx] || '').replace(/^"|"$/g, '').replace(/""/g, '"');
+      
+      if (rowScoutName.toLowerCase() === scoutName.toLowerCase() && rowPasswordHash) {
+        const passwordMatch = await bcrypt.compare(password, rowPasswordHash);
+        if (passwordMatch) {
+          return {
+            scoutName: rowScoutName,
+            realName: (row[headerIndex.indexOf('real_name')] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+            scoutGroup: (row[headerIndex.indexOf('scout_group')] || '').replace(/^"|"$/g, '').replace(/""/g, '"'),
+            userType: file.type,
+          };
+        }
       }
     }
   }
@@ -96,17 +104,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { scoutName, password, userType } = req.body || {};
+    const { scoutName, password } = req.body || {};
     
-    if (!scoutName || !password || !userType) {
-      return res.status(400).json({ error: 'scoutName, password, and userType are required' });
+    if (!scoutName || !password) {
+      return res.status(400).json({ error: 'scoutName and password are required' });
     }
 
-    if (userType !== 'admin' && userType !== 'scorer') {
-      return res.status(400).json({ error: 'userType must be "admin" or "scorer"' });
-    }
-
-    const user = await findUser(scoutName, password, userType);
+    const user = await findUser(scoutName, password);
     
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
